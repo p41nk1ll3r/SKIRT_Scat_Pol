@@ -1,12 +1,22 @@
 rm(list=ls())
-# my_lib <- "/media/joaomfras/GalaxyPol/Pol-Gal/Polarimetric-Imaging-Reduction-Scripts-(FORS2)/Commit/process_lib.R"
+# path to the process_lib.R, change accordingly
 my_lib <- "/home/joaomfras/Downloads/process_lib.R"
 source(my_lib)
 require(FITSio)
+# path to root folder of simulations
+# the following loop will iterate over subfolders inside this one
+# if you have more than one layer of subfolders you may uncomment 
+# lines 15, 17 and 76, anc comment line 16
 main_folder <- "/home/joaomfras/Desktop/Isotropic-Homogeneous_New_Round"
 
 mat_folders <- list.dirs(main_folder, recursive = F, full.names = T)
 
+# for each folder, this loop will retrieve expected fits files 
+# "stokesQ", "stokesU", "total" (flux) and "primaryscattered" (fluxes)
+# and will use them to create fits files for
+# polarization degree, polarization angle, polarized flux,
+# scattered to total flux ratio, singly scattered to scattered ratio
+# and multiply scattered to scaterred ratio
 for(m_folder in mat_folders){
   # input_folders <- list.dirs(m_folder, recursive = F, full.names = T)
   input_folder <- m_folder
