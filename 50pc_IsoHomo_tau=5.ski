@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- A SKIRT parameter file © Astronomical Observatory, Ghent University -->
+<skirt-simulation-hierarchy type="MonteCarloSimulation" format="9" producer="SKIRT v9.0 (git 2191a4e built on 22/03/2024 at 13:58:39)" time="2024-03-25T12:22:46.238">
+<MonteCarloSimulation userLevel="Regular" simulationMode="DustEmission" iteratePrimaryEmission="false" iterateSecondaryEmission="false" numPackets="5e8">
+        <random type="Random">
+            <Random seed="0"/>
+        </random>
+        <units type="Units">
+            <ExtragalacticUnits wavelengthOutputStyle="Wavelength" fluxOutputStyle="Frequency"/>
+        </units>
+        <cosmology type="Cosmology">
+            <LocalUniverseCosmology/>
+        </cosmology>
+        <sourceSystem type="SourceSystem">
+            <SourceSystem minWavelength="0.01 micron" maxWavelength="100 micron" wavelengths="0.55 micron" sourceBias="0.5">
+                <sources type="Source">
+                    <GeometricSource velocityMagnitude="0 km/s" sourceWeight="1" wavelengthBias="0.5">
+                        <geometry type="Geometry">
+                            <SpheroidalGeometryDecorator flattening="1">
+                                <geometry type="SpheGeometry">
+                                    <GaussianGeometry dispersion="50 pc"/>
+                                </geometry>
+                            </SpheroidalGeometryDecorator>
+                        </geometry>
+                        <sed type="SED">
+                            <BlackBodySED temperature="5000 K"/>
+                        </sed>
+                        <normalization type="LuminosityNormalization">
+                            <IntegratedLuminosityNormalization wavelengthRange="All" minWavelength="0.09 micron" maxWavelength="100 micron" integratedLuminosity="4e15 Lsun"/>
+                        </normalization>
+                        <wavelengthBiasDistribution type="WavelengthDistribution">
+                            <DefaultWavelengthDistribution/>
+                        </wavelengthBiasDistribution>
+                    </GeometricSource>
+                </sources>
+            </SourceSystem>
+        </sourceSystem>
+        <mediumSystem type="MediumSystem">
+            <MediumSystem>
+                <photonPacketOptions type="PhotonPacketOptions">
+                    <PhotonPacketOptions explicitAbsorption="false" forceScattering="true" minWeightReduction="1e4" minScattEvents="0" pathLengthBias="0.5"/>
+                </photonPacketOptions>
+                <radiationFieldOptions type="RadiationFieldOptions">
+                    <RadiationFieldOptions storeRadiationField="true">
+                        <radiationFieldWLG type="DisjointWavelengthGrid">
+                            <LogWavelengthGrid minWavelength="0.01 micron" maxWavelength="100 micron" numWavelengths="80"/>
+                        </radiationFieldWLG>
+                    </RadiationFieldOptions>
+                </radiationFieldOptions>
+                <secondaryEmissionOptions type="SecondaryEmissionOptions">
+                    <SecondaryEmissionOptions storeEmissionRadiationField="false" secondaryPacketsMultiplier="1" spatialBias="0.5" sourceBias="0.5"/>
+                </secondaryEmissionOptions>
+                <dustEmissionOptions type="DustEmissionOptions">
+                    <DustEmissionOptions dustEmissionType="Equilibrium" includeHeatingByCMB="false" maxFractionOfPrimary="0.01" maxFractionOfPrevious="0.03" sourceWeight="1" wavelengthBias="0.5">
+                        <cellLibrary type="SpatialCellLibrary">
+                            <AllCellsLibrary/>
+                        </cellLibrary>
+                        <dustEmissionWLG type="DisjointWavelengthGrid">
+                            <LogWavelengthGrid minWavelength="0.01 micron" maxWavelength="100 micron" numWavelengths="80"/>
+                        </dustEmissionWLG>
+                        <wavelengthBiasDistribution type="WavelengthDistribution">
+                            <DefaultWavelengthDistribution/>
+                        </wavelengthBiasDistribution>
+                    </DustEmissionOptions>
+                </dustEmissionOptions>
+                <media type="Medium">
+                    <GeometricMedium velocityMagnitude="0 km/s" magneticFieldStrength="1 uG">
+                    	<geometry type="Geometry">
+                            <SphericalClipGeometryDecorator remove="Outside" clipRadius="500 pc" centerX="0 pc" centerY="0 pc" centerZ="0 pc">
+                                <geometry type="Geometry">
+                            		<UniformBoxGeometry minX="-500 pc" maxX="500 pc" minY="-500 pc" maxY="500 pc" minZ="-500 pc" maxZ="500 pc"/>
+                                </geometry>
+                            </SphericalClipGeometryDecorator>
+                        </geometry>
+                                                <materialMix type="MaterialMix">
+                            <ConfigurableDustMix scatteringType="SpheroidalPolarization">
+                                <populations type="GrainPopulation">
+                                    <GrainPopulation numSizes="63" normalizationType="DustMassPerHydrogenAtom" dustMassPerHydrogenAtom="4.78e-58 Msun" dustMassPerHydrogenMass="0" factorOnSizeDistribution="1">
+                                        <composition type="GrainComposition">
+                                            <SpheroidalSilicateGrainComposition tableType="Builtin" emissionTable="" alignedEmissionTable="" nonAlignedEmissionTable="" alignmentFraction="0"/>
+                                        </composition>
+                                        <sizeDistribution type="GrainSizeDistribution">
+                                            <ZubkoSilicateGrainSizeDistribution/>
+                                        </sizeDistribution>
+                                    </GrainPopulation>
+                                    <GrainPopulation numSizes="63" normalizationType="DustMassPerHydrogenAtom" dustMassPerHydrogenAtom="2.13e-58 Msun" dustMassPerHydrogenMass="0" factorOnSizeDistribution="1">
+                                        <composition type="GrainComposition">
+                                            <SpheroidalGraphiteGrainComposition tableType="Builtin" emissionTable="" alignedEmissionTable="" nonAlignedEmissionTable="" alignmentFraction="0"/>
+                                        </composition>
+                                        <sizeDistribution type="GrainSizeDistribution">
+                                            <ZubkoGraphiteGrainSizeDistribution/>
+                                        </sizeDistribution>
+                                    </GrainPopulation>
+                                    <GrainPopulation numSizes="24" normalizationType="DustMassPerHydrogenAtom" dustMassPerHydrogenAtom="3.31e-59 Msun" dustMassPerHydrogenMass="0" factorOnSizeDistribution="1">
+                                        <composition type="GrainComposition">
+                                            <SpheroidalGraphiteGrainComposition tableType="Builtin" emissionTable="" alignedEmissionTable="" nonAlignedEmissionTable="" alignmentFraction="0"/>
+                                        </composition>
+                                        <sizeDistribution type="GrainSizeDistribution">
+                                            <ZubkoPAHGrainSizeDistribution/>
+                                        </sizeDistribution>
+                                    </GrainPopulation>
+                                </populations>
+                            </ConfigurableDustMix>
+                        </materialMix>
+                        <normalization type="MaterialNormalization">
+                            <OpticalDepthMaterialNormalization axis="Z" wavelength="0.35 micron" opticalDepth="5"/>
+                        </normalization>
+                        <magneticFieldDistribution type="VectorField">
+                            <CylindricalVectorField unityRadius="0.5 pc" exponent="2"/>
+                        </magneticFieldDistribution>
+                    </GeometricMedium>
+                </media>
+                <samplingOptions type="SamplingOptions">
+                    <SamplingOptions numDensitySamples="100" numPropertySamples="1" aggregateVelocity="Average"/>
+                </samplingOptions>
+                <grid type="SpatialGrid">
+                    <PolicyTreeSpatialGrid minX="-500 pc" maxX="500 pc" minY="-500 pc" maxY="500 pc" minZ="-500 pc" maxZ="500 pc" treeType="OctTree">
+                        <policy type="TreePolicy">
+                            <DensityTreePolicy minLevel="5" maxLevel="9" maxDustFraction="1e-6" maxDustOpticalDepth="0" wavelength="0.55 micron" maxDustDensityDispersion="0" maxElectronFraction="1e-6" maxGasFraction="1e-6"/>
+                        </policy>
+                    </PolicyTreeSpatialGrid>
+                </grid>
+            </MediumSystem>
+        </mediumSystem>
+        <instrumentSystem type="InstrumentSystem">
+            <InstrumentSystem>
+                <defaultWavelengthGrid type="WavelengthGrid">
+                    <LogWavelengthGrid minWavelength="0.1 micron" maxWavelength="2 micron" numWavelengths="30"/>
+                </defaultWavelengthGrid>
+                <instruments type="Instrument">
+                    <FrameInstrument instrumentName="i000a000" distance="1 Mpc" inclination="0 deg" azimuth="0 deg" roll="0 deg" fieldOfViewX="2000 pc" numPixelsX="800" centerX="0 pc" fieldOfViewY="2000 pc" numPixelsY="800" centerY="0 pc" recordComponents="true" numScatteringLevels="3" recordPolarization="true" recordStatistics="false"/>
+                </instruments>
+            </InstrumentSystem>
+        </instrumentSystem>
+        <probeSystem type="ProbeSystem">
+            <ProbeSystem>
+                <probes type="Probe">
+                    <ConvergenceInfoProbe probeName="grid_conv_ir" wavelength="1 micron" probeAfter="Setup"/>
+                    <ConvergenceInfoProbe probeName="grid_conv_yellow" wavelength="0.55 micron" probeAfter="Setup"/>
+                    <ConvergenceInfoProbe probeName="grid_conv_blue" wavelength="0.35 micron" probeAfter="Setup"/>
+                    <ConvergenceInfoProbe probeName="grid_conv_uv" wavelength="0.15 micron" probeAfter="Setup"/>
+                </probes>
+            </ProbeSystem>
+        </probeSystem>
+    </MonteCarloSimulation>
+</skirt-simulation-hierarchy>
