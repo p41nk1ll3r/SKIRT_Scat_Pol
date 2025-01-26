@@ -1,5 +1,6 @@
 rm(list=ls())
-# my_lib <- "/media/joaomfras/GalaxyPol/Pol-Gal/Polarimetric-Imaging-Reduction-Scripts-(FORS2)/Commit/process_lib.R"
+
+# path to process_lib.R, change accordingly
 my_lib <- "/home/joaomfras/Downloads/process_lib.R"
 source(my_lib)
 require(FITSio)
@@ -15,7 +16,7 @@ require(bigsnpr)
 require(latex2exp)
 
 # Estimate of distance from observer to target
-# This should be queried in a future implementation
+# This should be edited accordingly
 dist2Target <- 1 * 1e3
 unc_dist2Target <- 0
 
@@ -32,6 +33,11 @@ axRatio <- .9
 pxscl <- 0.1
 
 # Define main input folder
+# This function expects the results of different simulations
+# for it plot together their param vs wavelength
+# The list of commented paths below was for oue own use
+# Change according to your use case
+
 # main_folder <- "/home/joaomfras/Desktop/New_Grain_Tests"
 main_folder <- "/home/joaomfras/Desktop/Isotropic-Homogeneous_New_Round"
 # Si_folder <- paste0(main_folder, "/Sil")##
